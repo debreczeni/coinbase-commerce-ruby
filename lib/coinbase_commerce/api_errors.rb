@@ -116,24 +116,24 @@ module CoinbaseCommerce
         # in case of known error code
         case error_data[:type]
         when 'param_required'
-          ParamRequiredError.new(error_data[:message], opts)
+          ParamRequiredError.new(error_data[:message], **opts)
         when 'validation_error'
-          ValidationError.new(error_data[:message], opts)
+          ValidationError.new(error_data[:message], **opts)
         when 'invalid_request'
-          InvalidRequestError.new(error_data[:message], opts)
+          InvalidRequestError.new(error_data[:message], **opts)
         else
-          InvalidRequestError.new(error_data[:message], opts)
+          InvalidRequestError.new(error_data[:message], **opts)
         end
       when 401 then
-        AuthenticationError.new(error_data[:message], opts)
+        AuthenticationError.new(error_data[:message], **opts)
       when 404
-        ResourceNotFoundError.new(error_data[:message], opts)
+        ResourceNotFoundError.new(error_data[:message], **opts)
       when 429
-        RateLimitExceededError.new(error_data[:message], opts)
+        RateLimitExceededError.new(error_data[:message], **opts)
       when 500
-        InternalServerError.new(error_data[:message], opts)
+        InternalServerError.new(error_data[:message], **opts)
       when 503
-        ServiceUnavailableError.new(error_data[:message], opts)
+        ServiceUnavailableError.new(error_data[:message], **opts)
       else
         APIError.new(error_data[:message], opts)
       end
